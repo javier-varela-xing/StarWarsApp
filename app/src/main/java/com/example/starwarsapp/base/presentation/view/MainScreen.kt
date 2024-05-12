@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.starwarsapp.base.presentation.model.DEFAULT_ROUTE
 import com.example.starwarsapp.base.presentation.model.NavigationBarRoute
 import com.example.starwarsapp.base.presentation.view.components.BottomNavigationBar
 import com.example.starwarsapp.characters.presentation.view.CharactersScreen
@@ -42,7 +43,7 @@ internal fun MainScreen() {
 fun MainScreenContainer(navController: NavHostController, paddingValues: PaddingValues) {
     NavHost(
         navController = navController,
-        startDestination = NavigationBarRoute.defaultRoute.value,
+        startDestination = DEFAULT_ROUTE.value,
         modifier = Modifier.padding(paddingValues)
     ) {
         composable(NavigationBarRoute.MOVIES.value) { MoviesScreen() }

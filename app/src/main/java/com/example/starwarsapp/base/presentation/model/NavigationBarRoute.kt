@@ -1,5 +1,7 @@
 package com.example.starwarsapp.base.presentation.model
 
+internal val DEFAULT_ROUTE = NavigationBarRoute.MOVIES
+
 internal sealed class NavigationBarRoute(val value: String) {
 
     data object MOVIES : NavigationBarRoute("Movies")
@@ -9,15 +11,13 @@ internal sealed class NavigationBarRoute(val value: String) {
 
     companion object {
 
-        val defaultRoute = MOVIES
-
         fun getRoute(route: String?): NavigationBarRoute {
             return when (route) {
                 MOVIES.value -> MOVIES
                 CHARACTERS.value -> CHARACTERS
                 CHRONOLOGY.value -> CHRONOLOGY
                 TRIVIA.value -> TRIVIA
-                else -> defaultRoute
+                else -> DEFAULT_ROUTE
             }
         }
     }

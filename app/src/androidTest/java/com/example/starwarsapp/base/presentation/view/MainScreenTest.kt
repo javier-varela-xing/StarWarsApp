@@ -48,7 +48,7 @@ internal class MainScreenTest {
     }
 
     @Test
-    fun whenClickingCharactersIconInBottomNavigationBarShouldNavigateToMoviesScreen() {
+    fun whenClickingCharactersIconInBottomNavigationBarShouldNavigateToCharactersScreen() {
         composeTestRule
             .onNodeWithTag(ITEM_PREFIX + "Characters")
             .performClick()
@@ -58,7 +58,7 @@ internal class MainScreenTest {
     }
 
     @Test
-    fun whenClickingChronologyIconInBottomNavigationBarShouldNavigateToMoviesScreen() {
+    fun whenClickingChronologyIconInBottomNavigationBarShouldNavigateToChronologyScreen() {
         composeTestRule
             .onNodeWithTag(ITEM_PREFIX + "Chronology")
             .performClick()
@@ -68,7 +68,7 @@ internal class MainScreenTest {
     }
 
     @Test
-    fun whenClickingTriviaIconInBottomNavigationBarShouldNavigateToMoviesScreen() {
+    fun whenClickingTriviaIconInBottomNavigationBarShouldNavigateToTriviaScreen() {
         composeTestRule
             .onNodeWithTag(ITEM_PREFIX + "Trivia")
             .performClick()
