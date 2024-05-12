@@ -23,7 +23,7 @@ internal fun BottomNavigationBar(
             NavigationBarItem(
                 modifier = Modifier.testTag(ITEM_PREFIX + item.navigationBarRoute.value),
                 icon = {
-                    val icon = if (selectedRoute.value == item.navigationBarRoute.value) item.selectedIcon else item.notSelectedIcon
+                    val icon = getNavigationBarItemIcon(selectedRoute, item)
                     Icon(
                         painter = painterResource(id = icon),
                         contentDescription = null
@@ -37,6 +37,15 @@ internal fun BottomNavigationBar(
     }
 }
 
+private fun getNavigationBarItemIcon(selectedRoute: NavigationBarRoute, navigationBarItem: BottomNavigationBarItem): Int {
+    return if (selectedRoute.value == navigationBarItem.navigationBarRoute.value) {
+        navigationBarItem.selectedIcon
+    } else {
+        navigationBarItem.notSelectedIcon
+    }
+}
+
 internal object BottomNavigationBarTestTag {
+
     const val ITEM_PREFIX = "BottomNavigationBarItem_"
 }
