@@ -1,46 +1,51 @@
 package com.example.starwarsapp.base.presentation.view.components
 
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithTag
-import androidx.compose.ui.test.performClick
+import androidx.test.platform.app.InstrumentationRegistry
 import com.example.starwarsapp.base.presentation.model.BottomNavigationBarItem
-import com.example.starwarsapp.base.presentation.model.NavigationBarRoute
-import com.example.starwarsapp.base.presentation.view.components.BottomNavigationBarTestTag.ITEM_PREFIX
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.experimental.runners.Enclosed
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
-@RunWith(Enclosed::class)
-internal class BottomNavigationBarTest {
+@RunWith(Parameterized::class)
+internal class BottomNavigationBarTest(private val navigationBarItem: BottomNavigationBarItem) {
 
-    @RunWith(Parameterized::class)
-    class BottomNavigationBarCallbackTest(private val selectedRoute: NavigationBarRoute) {
+    @get:Rule val composeTestRule = createComposeRule()
 
-        @get:Rule val composeTestRule = createComposeRule()
+    private val context = InstrumentationRegistry.getInstrumentation().targetContext
+    private val bottomNavigationBarPageObject = BottomNavigationBarPageObject(composeTestRule, context)
+    private lateinit var clickedRoute: String
 
-        @Test
-        fun shouldCallOnItemClickedCallbackWhenClickingOnBottomNavigationBarItem() {
-            lateinit var clickedRoute: String
-            composeTestRule.setContent {
-                BottomNavigationBar(
-                    selectedRoute = selectedRoute,
-                    onItemClicked = { route -> clickedRoute = route }
-                )
-            }
-
-            composeTestRule
-                .onNodeWithTag(ITEM_PREFIX + selectedRoute.value)
-                .performClick()
-
-            assert(selectedRoute.value == clickedRoute)
+    @Before
+    fun setUp() {
+        composeTestRule.setContent {
+            BottomNavigationBar(
+                selectedRoute = navigationBarItem.navigationBarRoute,
+                onItemClicked = { route -> clickedRoute = route }
+            )
         }
+    }
 
-        companion object {
-
-            @JvmStatic @Parameterized.Parameters
-            fun parameters() = BottomNavigationBarItem.entries.map { it.navigationBarRoute }
+    @Test
+    fun shouldRenderBottomNavigationBar() {
+        bottomNavigationBarPageObject.assertNavigationBarItemText(navigationBarItem)
+        BottomNavigationBarItem.entries.map { item ->
+            bottomNavigationBarPageObject.assertNavigationBarItemIcon(navigationBarItem, item)
         }
+    }
+
+    @Test
+    fun shouldCallOnItemClickedCallbackWhenClickingOnBottomNavigationBarItem() {
+        bottomNavigationBarPageObject.clickNavigationBarItem(navigationBarItem)
+
+        assert(navigationBarItem.navigationBarRoute.value == clickedRoute)
+    }
+
+    companion object {
+
+        @JvmStatic @Parameterized.Parameters
+        fun parameters() = BottomNavigationBarItem.entries
     }
 }

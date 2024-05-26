@@ -9,9 +9,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.SemanticsPropertyKey
+import androidx.compose.ui.semantics.SemanticsPropertyReceiver
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.starwarsapp.base.presentation.model.BottomNavigationBarItem
+import com.example.starwarsapp.base.presentation.model.DEFAULT_ROUTE
 import com.example.starwarsapp.base.presentation.model.NavigationBarRoute
+import com.example.starwarsapp.base.presentation.view.components.BottomNavigationBarTestTag.ITEM_ICON_PREFIX
+import com.example.starwarsapp.base.presentation.view.components.BottomNavigationBarTestTag.ITEM_LABEL_PREFIX
 import com.example.starwarsapp.base.presentation.view.components.BottomNavigationBarTestTag.ITEM_PREFIX
+
+val DrawableResourceId = SemanticsPropertyKey<Int>("DrawableResourceId")
+var SemanticsPropertyReceiver.iconResourceId by DrawableResourceId
 
 @Composable
 internal fun BottomNavigationBar(
@@ -23,13 +33,21 @@ internal fun BottomNavigationBar(
             NavigationBarItem(
                 modifier = Modifier.testTag(ITEM_PREFIX + item.navigationBarRoute.value),
                 icon = {
-                    val icon = getNavigationBarItemIcon(selectedRoute, item)
+                    val iconResId = getNavigationBarItemIcon(selectedRoute, item)
                     Icon(
-                        painter = painterResource(id = icon),
+                        modifier = Modifier
+                            .testTag(ITEM_ICON_PREFIX + item.navigationBarRoute.value)
+                            .semantics { iconResourceId = iconResId },
+                        painter = painterResource(id = iconResId),
                         contentDescription = null
                     )
                 },
-                label = { Text(text = stringResource(id = item.text)) },
+                label = {
+                    Text(
+                        modifier = Modifier.testTag(ITEM_LABEL_PREFIX + item.navigationBarRoute.value),
+                        text = stringResource(id = item.text)
+                    )
+                },
                 selected = false,
                 onClick = { onItemClicked(item.navigationBarRoute.value) }
             )
@@ -48,4 +66,15 @@ private fun getNavigationBarItemIcon(selectedRoute: NavigationBarRoute, navigati
 internal object BottomNavigationBarTestTag {
 
     const val ITEM_PREFIX = "BottomNavigationBarItem_"
+    const val ITEM_LABEL_PREFIX = "BottomNavigationBarItemLabel_"
+    const val ITEM_ICON_PREFIX = "BottomNavigationBarItemIcon_"
+}
+
+@Preview
+@Composable
+internal fun BottomNavigationBarPreview() {
+    BottomNavigationBar(
+        selectedRoute = DEFAULT_ROUTE,
+        onItemClicked = {}
+    )
 }
