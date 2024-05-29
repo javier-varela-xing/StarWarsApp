@@ -25,7 +25,7 @@ var SemanticsPropertyReceiver.iconResourceId by DrawableResourceId
 
 @Composable
 internal fun BottomNavigationBar(
-    selectedRoute: NavigationBarRoute,
+    selectedRoute: NavigationBarRoute, // TODO: Should I use BottomNavigationBarItem instead?
     onItemClicked: (route: String) -> Unit
 ) {
     NavigationBar {
