@@ -22,7 +22,7 @@ internal class BottomNavigationBarTest(private val navigationBarItem: BottomNavi
     fun setUp() {
         composeTestRule.setContent {
             BottomNavigationBar(
-                selectedRoute = navigationBarItem.navigationBarRoute,
+                selectedItem = navigationBarItem,
                 onItemClicked = { route -> clickedRoute = route }
             )
         }

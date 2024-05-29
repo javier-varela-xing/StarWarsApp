@@ -12,8 +12,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.starwarsapp.base.presentation.model.DEFAULT_ROUTE
+import com.example.starwarsapp.base.presentation.model.DEFAULT_SELECTED_ITEM
 import com.example.starwarsapp.base.presentation.model.NavigationBarRoute
+import com.example.starwarsapp.base.presentation.model.NavigationBarRoute.CHRONOLOGY.toBottomNavigationBarItem
 import com.example.starwarsapp.base.presentation.view.components.BottomNavigationBar
 import com.example.starwarsapp.characters.presentation.view.CharactersScreen
 import com.example.starwarsapp.chronology.presentation.view.ChronologyScreen
@@ -29,7 +30,7 @@ internal fun MainScreen() {
     Scaffold(
         bottomBar = {
             BottomNavigationBar(
-                selectedRoute = selectedRoute,
+                selectedItem = selectedRoute.toBottomNavigationBarItem(),
                 onItemClicked = { route -> navigateTo(navController, route) }
             )
         },
@@ -43,7 +44,7 @@ internal fun MainScreen() {
 fun MainScreenContainer(navController: NavHostController, paddingValues: PaddingValues) {
     NavHost(
         navController = navController,
-        startDestination = DEFAULT_ROUTE.value,
+        startDestination = DEFAULT_SELECTED_ITEM.navigationBarRoute.value,
         modifier = Modifier.padding(paddingValues)
     ) {
         composable(NavigationBarRoute.MOVIES.value) { MoviesScreen() }

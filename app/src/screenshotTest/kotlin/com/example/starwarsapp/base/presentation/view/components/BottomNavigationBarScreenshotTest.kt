@@ -2,8 +2,8 @@ package com.example.starwarsapp.base.presentation.view.components
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.starwarsapp.base.presentation.model.DEFAULT_ROUTE
-import com.example.starwarsapp.base.presentation.model.NavigationBarRoute
+import com.example.starwarsapp.base.presentation.model.BottomNavigationBarItem
+import com.example.starwarsapp.base.presentation.model.DEFAULT_SELECTED_ITEM
 
 internal class BottomNavigationBarScreenshotTest {
 
@@ -11,7 +11,7 @@ internal class BottomNavigationBarScreenshotTest {
     @Composable
     fun BottomNavigationBarDefaultRouteSelectedPreview() {
         BottomNavigationBar(
-            selectedRoute = DEFAULT_ROUTE,
+            selectedItem = DEFAULT_SELECTED_ITEM,
             onItemClicked = {}
         )
     }
@@ -20,7 +20,7 @@ internal class BottomNavigationBarScreenshotTest {
     @Composable
     fun BottomNavigationBarMoviesSelectedPreview() {
         BottomNavigationBar(
-            selectedRoute = NavigationBarRoute.MOVIES,
+            selectedItem = BottomNavigationBarItem.Movies,
             onItemClicked = {}
         )
     }
@@ -29,7 +29,7 @@ internal class BottomNavigationBarScreenshotTest {
     @Composable
     fun BottomNavigationBarCharactersSelectedPreview() {
         BottomNavigationBar(
-            selectedRoute = NavigationBarRoute.CHARACTERS,
+            selectedItem = BottomNavigationBarItem.Characters,
             onItemClicked = {}
         )
     }
@@ -38,7 +38,7 @@ internal class BottomNavigationBarScreenshotTest {
     @Composable
     fun BottomNavigationBarChronologySelectedPreview() {
         BottomNavigationBar(
-            selectedRoute = NavigationBarRoute.CHRONOLOGY,
+            selectedItem = BottomNavigationBarItem.Chronology,
             onItemClicked = {}
         )
     }
@@ -47,7 +47,7 @@ internal class BottomNavigationBarScreenshotTest {
     @Composable
     fun BottomNavigationBarTriviaSelectedPreview() {
         BottomNavigationBar(
-            selectedRoute = NavigationBarRoute.TRIVIA,
+            selectedItem = BottomNavigationBarItem.Trivia,
             onItemClicked = {}
         )
     }

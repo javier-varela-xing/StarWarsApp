@@ -14,8 +14,7 @@ import androidx.compose.ui.semantics.SemanticsPropertyReceiver
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.starwarsapp.base.presentation.model.BottomNavigationBarItem
-import com.example.starwarsapp.base.presentation.model.DEFAULT_ROUTE
-import com.example.starwarsapp.base.presentation.model.NavigationBarRoute
+import com.example.starwarsapp.base.presentation.model.DEFAULT_SELECTED_ITEM
 import com.example.starwarsapp.base.presentation.view.components.BottomNavigationBarTestTag.ITEM_ICON_PREFIX
 import com.example.starwarsapp.base.presentation.view.components.BottomNavigationBarTestTag.ITEM_LABEL_PREFIX
 import com.example.starwarsapp.base.presentation.view.components.BottomNavigationBarTestTag.ITEM_PREFIX
@@ -25,7 +24,7 @@ var SemanticsPropertyReceiver.iconResourceId by DrawableResourceId
 
 @Composable
 internal fun BottomNavigationBar(
-    selectedRoute: NavigationBarRoute, // TODO: Should I use BottomNavigationBarItem instead?
+    selectedItem: BottomNavigationBarItem,
     onItemClicked: (route: String) -> Unit
 ) {
     NavigationBar {
@@ -33,7 +32,7 @@ internal fun BottomNavigationBar(
             NavigationBarItem(
                 modifier = Modifier.testTag(ITEM_PREFIX + item.navigationBarRoute.value),
                 icon = {
-                    val iconResId = getNavigationBarItemIcon(selectedRoute, item)
+                    val iconResId = getNavigationBarItemIcon(selectedItem, item)
                     Icon(
                         modifier = Modifier
                             .testTag(ITEM_ICON_PREFIX + item.navigationBarRoute.value)
@@ -55,8 +54,11 @@ internal fun BottomNavigationBar(
     }
 }
 
-private fun getNavigationBarItemIcon(selectedRoute: NavigationBarRoute, navigationBarItem: BottomNavigationBarItem): Int {
-    return if (selectedRoute.value == navigationBarItem.navigationBarRoute.value) {
+private fun getNavigationBarItemIcon(
+    selectedItem: BottomNavigationBarItem,
+    navigationBarItem: BottomNavigationBarItem
+): Int {
+    return if (selectedItem.navigationBarRoute.value == navigationBarItem.navigationBarRoute.value) {
         navigationBarItem.selectedIcon
     } else {
         navigationBarItem.notSelectedIcon
@@ -74,7 +76,7 @@ internal object BottomNavigationBarTestTag {
 @Composable
 internal fun BottomNavigationBarPreview() {
     BottomNavigationBar(
-        selectedRoute = DEFAULT_ROUTE,
+        selectedItem = DEFAULT_SELECTED_ITEM,
         onItemClicked = {}
     )
 }
