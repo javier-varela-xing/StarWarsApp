@@ -29,7 +29,7 @@ internal class BottomNavigationBarScreenshotTest {
     @Composable
     fun BottomNavigationBarCharactersSelectedPreview() {
         BottomNavigationBar(
-            selectedItem = BottomNavigationBarItem.Characters,
+            selectedItem = BottomNavigationBarItem.Movies,
             onItemClicked = {}
         )
     }
