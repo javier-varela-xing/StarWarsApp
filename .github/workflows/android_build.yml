@@ -26,6 +26,13 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v4
 
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
@@ -38,8 +45,17 @@ jobs:
 #      - name: Run unit tests
 #        run: ./gradlew test
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
+      - name: Instrumentation Tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          target: ${{ matrix.target }}
+          arch: x86
+          profile: Nexus 6
+          script: ./gradlew connectedCheck --stacktrace
 
-      - name: Run integration tests
-        run: ./gradlew connectedAndroidTest
+#      - name: Set up Android SDK
+#        uses: android-actions/setup-android@v2
+
+#      - name: Run integration tests
+#        run: ./gradlew connectedAndroidTest
