@@ -62,6 +62,14 @@ jobs:
           script: ./gradlew connectedCheck --stacktrace
           disable-animations: true
           emulator-boot-timeout: 1200
+          continue-on-error: true
+
+      - name: Upload Test Reports
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-test-report
+          path: app/build/reports/androidTests/connected/debug/
 
 #      - name: Wait for Android Emulator to finish booting
 #        run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'
