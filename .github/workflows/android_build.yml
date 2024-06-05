@@ -55,19 +55,23 @@ jobs:
 #      - name: Run unit tests
 #        run: ./gradlew test
 
-      - name: Instrumentation Tests
+      - name: Configure Android emulator and run instrumentation tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
           target: default
           arch: x86
           profile: Nexus 6
-          script: ./gradlew connectedCheck --stacktrace
+          script: ./gradlew connectedAndroidTest --stacktrace
           disable-animations: true
           emulator-boot-timeout: 600
 
 #      - name: Wait for Android Emulator to finish booting
 #        run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'
 
-      - name: Run integration tests
-        run: ./gradlew connectedAndroidTest
+#      - name: Run integration tests
+#        run: ./gradlew connectedAndroidTest
+
+      - name: Shutdown emulator
+        if: always()
+        run: adb -s emulator-5554 emu kill
