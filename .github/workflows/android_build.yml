@@ -65,18 +65,9 @@ jobs:
           script: ./gradlew connectedCheck --stacktrace
           disable-animations: true
           emulator-boot-timeout: 600
-#          headless: true
-#          timeout: 10m
 
 #      - name: Wait for Android Emulator to finish booting
 #        run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'
-
-      - name: Shutdown emulator
-        if: always()
-        run: adb -s emulator-5554 emu kill
-
-#      - name: Set up Android SDK
-#        uses: android-actions/setup-android@v2
 
       - name: Run integration tests
         run: ./gradlew connectedAndroidTest
