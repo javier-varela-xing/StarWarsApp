@@ -42,9 +42,9 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
-        with:
-          api-level: 30
-          build-tools: 30.0.3
+#        with: Creo que estas dos cosas de abajo no están permitidas
+#          api-level: 30
+#          build-tools: 30.0.3
 
       - name: Grant execute permissions for gradlew
         run: chmod +x ./gradlew
@@ -69,9 +69,9 @@ jobs:
 #      - name: Run integration tests
 #        run: ./gradlew connectedAndroidTest
 
-      - name: Shutdown emulator
-        if: always()
-        run: |
-          if adb -s emulator-5554 get-state 1>/dev/null 2>&1; then
-            adb -s emulator-5554 emu kill;
-          fi
+#      - name: Shutdown emulator
+#        if: always()
+#        run: |
+#          if adb -s emulator-5554 get-state 1>/dev/null 2>&1; then
+#            adb -s emulator-5554 emu kill;
+#          fi
