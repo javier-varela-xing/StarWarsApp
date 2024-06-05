@@ -1,10 +1,7 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
+  # Triggers the workflow on push or pull request events for the main branch
   push:
     branches: [ "main" ]
   pull_request:
@@ -59,12 +56,12 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 29
-          target: default
-          arch: x86
+          target: google_apis
+          arch: x86_64
           profile: Nexus 6
           script: ./gradlew connectedAndroidTest --stacktrace
           disable-animations: true
-          emulator-boot-timeout: 600
+          emulator-boot-timeout: 1200
 
 #      - name: Wait for Android Emulator to finish booting
 #        run: adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done; input keyevent 82'
@@ -74,4 +71,7 @@ jobs:
 
       - name: Shutdown emulator
         if: always()
-        run: adb -s emulator-5554 emu kill
+        run: |
+          if adb -s emulator-5554 get-state 1>/dev/null 2>&1; then
+            adb -s emulator-5554 emu kill;
+          fi
