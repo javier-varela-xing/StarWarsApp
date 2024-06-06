@@ -35,11 +35,12 @@ jobs:
           target: google_apis
           arch: x86_64
           profile: Nexus 6
-          script: ./gradlew connectedAndroidTest
+          script: ./gradlew connectedCheck
           disable-animations: true
+          emulator-boot-timeout: 1200
 
       - name: Run UI tests
-        run: ./gradlew connectedAndroidTest
+        run: ./gradlew connectedCheck
 
 
 
