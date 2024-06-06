@@ -25,6 +25,9 @@ jobs:
             ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}
             ${{ runner.os }}
 
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+
       - name: Run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
