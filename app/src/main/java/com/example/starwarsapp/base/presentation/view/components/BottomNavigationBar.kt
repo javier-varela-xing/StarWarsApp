@@ -44,7 +44,7 @@ internal fun BottomNavigationBar(
                 label = {
                     Text(
                         modifier = Modifier.testTag(ITEM_LABEL_PREFIX + item.navigationBarRoute.value),
-                        text = stringResource(id = item.text)
+                        text = "Hola"
                     )
                 },
                 selected = false,
