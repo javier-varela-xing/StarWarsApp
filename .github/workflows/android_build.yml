@@ -20,6 +20,12 @@ jobs:
           sudo udevadm control --reload-rules
           sudo udevadm trigger --name-match=kvm
 
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: "temurin"
+
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
