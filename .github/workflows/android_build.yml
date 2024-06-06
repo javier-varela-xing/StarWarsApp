@@ -7,40 +7,52 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   ui-tests:
-    runs-on: ubuntu-latest
-
+    runs-on: macOS-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up JDK
-        uses: actions/setup-java@v2
-        with:
-          java-version: 17
-          distribution: "temurin"
-
-      - name: Download dependencies
-        run: ./gradlew dependencies
-
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
-
-      - name: Start emulator
+      - name: Run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 30
-          target: google_apis
-          arch: x86_64
-          profile: Nexus 6
           script: ./gradlew connectedCheck
-          disable-animations: true
-          emulator-boot-timeout: 1200
 
-      - name: Run UI tests
-        run: ./gradlew connectedCheck
+#jobs:
+#  ui-tests:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v2
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v2
+#        with:
+#          java-version: 17
+#          distribution: "temurin"
+#
+#      - name: Download dependencies
+#        run: ./gradlew dependencies
+#
+#      - name: Set up Android SDK
+#        uses: android-actions/setup-android@v2
+#
+#      - name: Start emulator
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: 30
+#          target: google_apis
+#          arch: x86_64
+#          profile: Nexus 6
+#          script: ./gradlew connectedCheck
+#          disable-animations: true
+#          emulator-boot-timeout: 1200
+#
+#      - name: Run UI tests
+#        run: ./gradlew connectedCheck
 
 
 
