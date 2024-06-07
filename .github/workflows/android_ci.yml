@@ -40,7 +40,8 @@ jobs:
         with:
           api-level: 29
           target: google_apis
-          profile: pixel_3a
+          arch: x86_64
+          profile: Nexus 6
           script: ./gradlew validateDebugScreenshotTest
 
       - name: Upload test results
