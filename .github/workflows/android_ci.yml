@@ -40,3 +40,17 @@ jobs:
         with:
           api-level: 29
           script: ./gradlew validateDebugScreenshotTest
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: app/build/reports/tests/testDebugUnitTest/
+
+      - name: Upload screenshot test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshot-test-results
+          path: app/build/test-results/validateDebugScreenshotTest/
