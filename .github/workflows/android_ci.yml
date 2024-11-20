@@ -57,6 +57,9 @@ jobs:
 #          name: test-results
 #          path: app/build/reports/tests/testDebugUnitTest/
 
+      - name: List files in build directory
+        run: find app/build/ -type f
+
       - name: Run screenshot tests
         run: ./gradlew validateDebugScreenshotTest
 
