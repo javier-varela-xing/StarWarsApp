@@ -52,14 +52,14 @@ jobs:
 
 #      - name: Upload test results
 #        if: always()
-#        uses: actions/upload-artifact@v2
+#        uses: actions/upload-artifact@v4
 #        with:
 #          name: test-results
 #          path: app/build/reports/tests/testDebugUnitTest/
 
       - name: Upload screenshot test results
         if: always()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: screenshot-test-results
           path: app/build/test-results/validateDebugScreenshotTest/
