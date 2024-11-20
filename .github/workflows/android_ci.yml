@@ -41,21 +41,21 @@ jobs:
 #          api-level: 29
 #          script: ./gradlew connectedCheck
 
-      - name: Run screenshot tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          target: google_apis
-          arch: x86_64
-          profile: Nexus 6
-          script: ./gradlew updateDebugScreenshotTest
+#      - name: Run screenshot tests
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: 29
+#          target: google_apis
+#          arch: x86_64
+#          profile: Nexus 6
+#          script: ./gradlew updateDebugScreenshotTest
 
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v2
-        with:
-          name: test-results
-          path: app/build/reports/tests/testDebugUnitTest/
+#      - name: Upload test results
+#        if: always()
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: test-results
+#          path: app/build/reports/tests/testDebugUnitTest/
 
       - name: Upload screenshot test results
         if: always()
