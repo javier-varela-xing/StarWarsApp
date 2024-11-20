@@ -62,4 +62,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: screenshot-test-results
-          path: app/build/test-results/validateDebugScreenshotTest/
+          path: app/build/outputs/screenshotTest-results/
