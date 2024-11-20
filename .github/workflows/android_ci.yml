@@ -36,19 +36,11 @@ jobs:
           build-scan-terms-of-use-url: "https://gradle.com/terms-of-service"
           build-scan-terms-of-use-agree: "yes"
 
-#      - name: Set up Android SDK
-#        uses: android-actions/setup-android@v2
-#        with:
-#          api-level: 34
-#          build-tools: 34.0.0
-#          target: 'android-34'
-#          ndk: 'latest'
-
       - name: Gradle cache
         uses: gradle/actions/setup-gradle@v3
 
-#      - name: Run unit tests
-#        run: ./gradlew test
+      - name: Run unit tests
+        run: ./gradlew test
 
 #      - name: Run integration tests
 #        uses: reactivecircus/android-emulator-runner@v2
@@ -56,27 +48,11 @@ jobs:
 #          api-level: 29
 #          script: ./gradlew connectedCheck
 
-#      - name: Run screenshot tests
-#        uses: reactivecircus/android-emulator-runner@v2
-#        with:
-#          api-level: 29
-#          target: google_apis
-#          arch: x86_64
-#          profile: Nexus 6
-#          script: ./gradlew updateDebugScreenshotTest
-
-#      - name: Upload test results
-#        if: always()
-#        uses: actions/upload-artifact@v4
-#        with:
-#          name: test-results
-#          path: app/build/reports/tests/testDebugUnitTest/
-
       - name: Run screenshot tests
         run: ./gradlew validateDebugScreenshotTest
 
-#      - name: List files in build directory
-#        run: find app/build/ -type f
+      - name: List files in build directory
+        run: find app/build/ -type f
 
       - name: Upload screenshot test results
         if: always()
