@@ -65,7 +65,6 @@ jobs:
 #          profile: Nexus 6
 #          script: ./gradlew updateDebugScreenshotTest
 
-
 #      - name: Upload test results
 #        if: always()
 #        uses: actions/upload-artifact@v4
