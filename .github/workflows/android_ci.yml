@@ -39,20 +39,17 @@ jobs:
       - name: Gradle cache
         uses: gradle/actions/setup-gradle@v3
 
-#      - name: Run unit tests
-#        run: ./gradlew test
+      - name: Run unit tests
+        run: ./gradlew test
 
-#      - name: Run integration tests
-#        uses: reactivecircus/android-emulator-runner@v2
-#        with:
-#          api-level: 29
-#          script: ./gradlew connectedCheck
+      - name: Run integration tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: ./gradlew connectedCheck
 
       - name: Run screenshot tests
         run: ./gradlew validateDebugScreenshotTest
-
-      - name: List files in build directory
-        run: find app/build/ -type f
 
       - name: Upload screenshot test results
         if: always()
