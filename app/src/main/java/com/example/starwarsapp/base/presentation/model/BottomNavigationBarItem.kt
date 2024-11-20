@@ -4,8 +4,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.example.starwarsapp.R
 
-//internal val DEFAULT_SELECTED_ITEM = BottomNavigationBarItem.Movies
-internal val DEFAULT_SELECTED_ITEM = BottomNavigationBarItem.Characters
+internal val DEFAULT_SELECTED_ITEM = BottomNavigationBarItem.Movies
+//internal val DEFAULT_SELECTED_ITEM = BottomNavigationBarItem.Characters
 
 internal enum class BottomNavigationBarItem(
     @StringRes val text: Int,
